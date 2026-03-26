@@ -1,207 +1,1145 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Saif Akhter - Portfolio</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #121212;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            background-color: #1f1f1f;
-            padding: 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-        }
-        header p {
-            font-size: 1.2em;
-            color: #bbbbbb;
-        }
-        nav {
-            background-color: #333;
-            padding: 10px;
-            text-align: center;
-        }
-        nav a {
-            color: #ffffff;
-            text-decoration: none;
-            margin: 0 15px;
-            font-weight: bold;
-        }
-        nav a:hover {
-            color: #ffcc00;
-        }
-        section {
-            padding: 40px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        h2 {
-            border-bottom: 2px solid #ffcc00;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        ul li {
-            background: #1f1f1f;
-            margin: 10px 0;
-            padding: 15px;
-            border-radius: 5px;
-        }
-        .skills-category {
-            margin-bottom: 30px;
-        }
-        .skills-category ul {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-        }
-        .project {
-            background: #1f1f1f;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 5px;
-        }
-        footer {
-            background-color: #1f1f1f;
-            text-align: center;
-            padding: 10px;
-            font-size: 0.9em;
-            color: #bbbbbb;
-        }
-        @media (max-width: 768px) {
-            .skills-category ul {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Charlon Dale G. San Agustin — QA Engineer</title>
+  <meta name="description" content="Software QA Engineer specializing in test automation, functional testing, and quality assurance." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & BASE ────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --ink:    #0a0a0f;
+      --paper:  #f5f2ec;
+      --blue:   #0f528c;
+      --red:    #ed0049;
+      --gold:   #f5c842;
+      --gray:   #6b7280;
+      --light:  #e8e4dc;
+      --font-display: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── CUSTOM CURSOR ───────────────────────────────── */
+    .cursor {
+      width: 12px; height: 12px;
+      background: var(--red);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s, width 0.2s, height 0.2s, background 0.2s;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 2px solid var(--blue);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.18s ease, width 0.2s, height 0.2s;
+    }
+    body:has(a:hover) .cursor, body:has(button:hover) .cursor { width: 20px; height: 20px; background: var(--gold); }
+    body:has(a:hover) .cursor-ring, body:has(button:hover) .cursor-ring { width: 60px; height: 60px; }
+
+    /* ─── NOISE OVERLAY ───────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.03; pointer-events: none; z-index: 1000;
+    }
+
+    /* ─── NAV ─────────────────────────────────────────── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 900;
+      padding: 20px 40px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: rgba(245,242,236,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(10,10,15,0.08);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: 0 4px 30px rgba(10,10,15,0.1); }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-weight: 800; font-size: 1.25rem;
+      color: var(--ink); text-decoration: none;
+      letter-spacing: -0.03em;
+    }
+    .nav-logo span { color: var(--red); }
+
+    .nav-links {
+      display: flex; gap: 32px; list-style: none; align-items: center;
+    }
+    .nav-links a {
+      font-family: var(--font-display);
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--gray);
+      transition: color 0.2s;
+      cursor: none;
+    }
+    .nav-links a:hover { color: var(--red); }
+
+    .nav-cta {
+      background: var(--ink) !important; color: var(--paper) !important;
+      padding: 10px 22px; border-radius: 100px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--red) !important; color: #fff !important; }
+
+    /* hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: none; background: none; border: none; padding: 4px;
+    }
+    .hamburger span {
+      display: block; width: 26px; height: 2px;
+      background: var(--ink); transition: all 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    .mobile-menu {
+      display: none; position: fixed; top: 70px; left: 0; right: 0;
+      background: var(--paper); z-index: 899;
+      padding: 20px 40px 30px; border-bottom: 2px solid var(--ink);
+      flex-direction: column; gap: 20px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display); font-size: 1.4rem;
+      font-weight: 800; color: var(--ink); text-decoration: none;
+      text-transform: uppercase; letter-spacing: -0.02em;
+      transition: color 0.2s; cursor: none;
+    }
+    .mobile-menu a:hover { color: var(--red); }
+
+    /* ─── HERO ────────────────────────────────────────── */
+    #hero {
+      min-height: 100vh;
+      display: grid; grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 120px 80px 80px;
+      gap: 60px;
+      position: relative; overflow: hidden;
+    }
+
+    .hero-bg-text {
+      position: absolute; bottom: -40px; left: -10px;
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(80px, 14vw, 200px);
+      color: rgba(10,10,15,0.04);
+      line-height: 1; user-select: none; pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--red); color: #fff;
+      font-family: var(--font-display); font-size: 0.7rem;
+      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 8px 16px; border-radius: 100px; margin-bottom: 24px;
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-badge::before { content: '●'; font-size: 0.5rem; animation: pulse 1.5s infinite; }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; } 50% { opacity: 0.3; }
+    }
+
+    .hero-title {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(2.8rem, 5vw, 5rem);
+      line-height: 1.0; letter-spacing: -0.04em;
+      margin-bottom: 24px;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+    .hero-title .line { display: block; overflow: hidden; }
+    .hero-title .accent { color: var(--red); }
+    .hero-title .stroke {
+      -webkit-text-stroke: 2px var(--ink);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.05rem; line-height: 1.7; color: var(--gray);
+      max-width: 480px; margin-bottom: 40px;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 16px;
+      animation: fadeUp 0.7s 0.3s ease both;
+    }
+
+    .btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      padding: 14px 30px; border-radius: 6px;
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.85rem; letter-spacing: 0.04em; text-transform: uppercase;
+      text-decoration: none; cursor: none; transition: all 0.25s;
+      border: 2px solid transparent;
+    }
+    .btn-primary { background: var(--ink); color: var(--paper); }
+    .btn-primary:hover { background: var(--red); }
+    .btn-outline { border-color: var(--ink); color: var(--ink); }
+    .btn-outline:hover { background: var(--ink); color: var(--paper); }
+    .btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    .hero-image-wrap {
+      position: relative; animation: fadeIn 1s 0.2s ease both;
+    }
+    .hero-image-wrap::before {
+      content: '';
+      position: absolute; inset: -8px -8px -8px 8px;
+      border: 3px solid var(--red); border-radius: 16px;
+      z-index: 0;
+    }
+    .hero-image-wrap::after {
+      content: 'QA';
+      position: absolute; bottom: -20px; right: -20px;
+      font-family: var(--font-display); font-weight: 800; font-size: 5rem;
+      color: var(--gold); z-index: 2; line-height: 1; letter-spacing: -0.04em;
+    }
+    .hero-image-wrap img {
+      width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top;
+      border-radius: 12px; position: relative; z-index: 1;
+      filter: grayscale(20%);
+      display: block;
+    }
+
+    .hero-stats {
+      display: flex; gap: 32px; margin-top: 40px;
+      animation: fadeUp 0.7s 0.4s ease both;
+    }
+    .stat-item { border-left: 3px solid var(--red); padding-left: 14px; }
+    .stat-num {
+      font-family: var(--font-display); font-size: 1.8rem;
+      font-weight: 800; color: var(--ink); line-height: 1;
+    }
+    .stat-label { font-size: 0.75rem; color: var(--gray); margin-top: 4px; }
+
+    /* ─── SECTION BASE ────────────────────────────────── */
+    section { padding: 100px 80px; }
+    .section-tag {
+      display: inline-block;
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--red); border: 1.5px solid var(--red);
+      padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .section-title {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(2rem, 4vw, 3.5rem); letter-spacing: -0.04em;
+      line-height: 1.05; margin-bottom: 16px; color: var(--ink);
+    }
+    .section-title em { font-style: normal; color: var(--red); }
+    .section-sub { color: var(--gray); font-size: 1rem; line-height: 1.7; max-width: 520px; }
+
+    /* ─── ABOUT ───────────────────────────────────────── */
+    #about {
+      background: var(--ink); color: var(--paper);
+      position: relative; overflow: hidden;
+    }
+    #about .section-tag { color: var(--gold); border-color: var(--gold); }
+    #about .section-title { color: var(--paper); }
+    #about .section-title em { color: var(--gold); }
+    #about .section-sub { color: rgba(245,242,236,0.65); }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-frame {
+      width: 100%;
+      background: var(--blue);
+      border-radius: 12px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+    }
+    .about-img-frame img {
+      width: 100%; height: 100%; object-fit: cover; object-position: top;
+      mix-blend-mode: luminosity; opacity: 0.85;
+    }
+    .about-sticker {
+      position: absolute; bottom: -24px; right: -24px;
+      background: var(--gold); color: var(--ink);
+      font-family: var(--font-display); font-weight: 800;
+      font-size: 0.8rem; letter-spacing: 0.06em; text-align: center;
+      padding: 18px; border-radius: 50%; width: 100px; height: 100px;
+      display: flex; align-items: center; justify-content: center;
+      animation: spin 12s linear infinite;
+      text-transform: uppercase; line-height: 1.2;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .about-text { padding-bottom: 20px; }
+    .about-text p { font-size: 1rem; line-height: 1.8; color: rgba(245,242,236,0.8); margin-bottom: 20px; }
+    .about-text p strong { color: var(--gold); }
+
+    .about-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
+    .about-tag {
+      background: rgba(245,242,236,0.08); border: 1px solid rgba(245,242,236,0.15);
+      color: rgba(245,242,236,0.9); font-size: 0.8rem;
+      padding: 6px 16px; border-radius: 100px;
+      font-family: var(--font-display); font-weight: 700;
+    }
+
+    .about-bg-number {
+      position: absolute; bottom: -60px; right: -10px;
+      font-family: var(--font-display); font-size: clamp(120px, 20vw, 280px);
+      font-weight: 800; color: rgba(245,242,236,0.03);
+      user-select: none; pointer-events: none; line-height: 1;
+    }
+
+    /* ─── SKILLS ──────────────────────────────────────── */
+    #skills { background: var(--paper); }
+
+    .skills-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+
+    .skill-card {
+      background: var(--light); padding: 40px 32px;
+      position: relative; overflow: hidden;
+      transition: background 0.3s;
+    }
+    .skill-card:hover { background: var(--ink); }
+    .skill-card:hover .skill-title,
+    .skill-card:hover .skill-desc,
+    .skill-card:hover .skill-item { color: var(--paper) !important; }
+    .skill-card:hover .skill-num { color: rgba(245,242,236,0.06); }
+    .skill-card:hover .skill-icon-wrap { background: var(--red); }
+
+    .skill-num {
+      font-family: var(--font-display); font-size: 4rem; font-weight: 800;
+      color: rgba(10,10,15,0.06); position: absolute; top: 16px; right: 20px;
+      line-height: 1; transition: color 0.3s;
+    }
+    .skill-icon-wrap {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: var(--blue); display: flex; align-items: center;
+      justify-content: center; margin-bottom: 20px;
+      font-size: 1.5rem; transition: background 0.3s;
+    }
+    .skill-title {
+      font-family: var(--font-display); font-size: 1.2rem; font-weight: 800;
+      color: var(--ink); margin-bottom: 12px; letter-spacing: -0.02em;
+      transition: color 0.3s;
+    }
+    .skill-desc { font-size: 0.85rem; color: var(--gray); margin-bottom: 20px; transition: color 0.3s; }
+    .skill-list { list-style: none; }
+    .skill-item {
+      font-size: 0.82rem; color: var(--gray); padding: 5px 0;
+      border-bottom: 1px solid rgba(10,10,15,0.06);
+      display: flex; align-items: center; gap: 8px; transition: color 0.3s;
+    }
+    .skill-item::before { content: '→'; color: var(--red); font-size: 0.7rem; flex-shrink: 0; }
+
+    /* ─── TOOLS ───────────────────────────────────────── */
+    #tools { background: var(--light); overflow: hidden; }
+
+    .tools-intro { max-width: 560px; margin-bottom: 60px; }
+
+    .tools-category { margin-bottom: 50px; }
+    .tools-cat-label {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--gray); margin-bottom: 20px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .tools-cat-label::after {
+      content: ''; flex: 1; height: 1px; background: rgba(10,10,15,0.15);
+    }
+
+    .tools-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .tool-pill {
+      display: flex; align-items: center; gap: 10px;
+      background: var(--paper); border: 1.5px solid rgba(10,10,15,0.1);
+      padding: 10px 18px; border-radius: 100px;
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 0.82rem; color: var(--ink);
+      transition: all 0.2s; cursor: none;
+    }
+    .tool-pill:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .tool-pill img { width: 22px; height: 22px; object-fit: contain; flex-shrink: 0; }
+
+    /* ─── CERTIFICATIONS ─────────────────────────────── */
+    #certifications { background: var(--paper); }
+
+    .certs-header { margin-bottom: 60px; }
+
+    .certs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+
+    .cert-card {
+      background: var(--light); border-radius: 12px;
+      padding: 32px; display: flex; gap: 24px; align-items: flex-start;
+      transition: transform 0.3s, box-shadow 0.3s;
+      text-decoration: none;
+      border: 2px solid transparent;
+    }
+    .cert-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(10,10,15,0.12);
+      border-color: var(--red);
+    }
+    .cert-year {
+      font-family: var(--font-display); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--paper); background: var(--blue);
+      padding: 6px 12px; border-radius: 6px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .cert-body { flex: 1; }
+    .cert-title {
+      font-family: var(--font-display); font-weight: 700;
+      font-size: 1rem; color: var(--ink); margin-bottom: 6px;
+      letter-spacing: -0.01em; line-height: 1.3;
+    }
+    .cert-issuer { font-size: 0.82rem; color: var(--gray); }
+    .cert-arrow {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--paper); border: 1.5px solid rgba(10,10,15,0.15);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s;
+      font-size: 0.9rem; color: var(--gray);
+    }
+    .cert-card:hover .cert-arrow { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* ─── PROJECTS ────────────────────────────────────── */
+    #projects { background: var(--ink); overflow: hidden; }
+    #projects .section-tag { color: var(--gold); border-color: var(--gold); }
+    #projects .section-title { color: var(--paper); }
+    #projects .section-title em { color: var(--gold); }
+    .projects-header { margin-bottom: 60px; }
+
+    .projects-list { display: flex; flex-direction: column; gap: 2px; }
+
+    .project-item {
+      display: grid; grid-template-columns: auto 1fr auto;
+      align-items: center; gap: 40px;
+      padding: 32px 0;
+      border-bottom: 1px solid rgba(245,242,236,0.1);
+      transition: background 0.3s;
+      cursor: none;
+    }
+    .project-item:first-child { border-top: 1px solid rgba(245,242,236,0.1); }
+
+    .project-num {
+      font-family: var(--font-display); font-size: 0.8rem; font-weight: 700;
+      color: rgba(245,242,236,0.25); letter-spacing: 0.05em; width: 32px;
+    }
+    .project-main { flex: 1; }
+    .project-name {
+      font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(1.3rem, 2.5vw, 2rem); letter-spacing: -0.03em;
+      color: var(--paper); line-height: 1.1; margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    .project-item:hover .project-name { color: var(--gold); }
+    .project-meta { display: flex; align-items: center; gap: 12px; }
+    .project-year { font-size: 0.78rem; color: rgba(245,242,236,0.35); }
+    .project-tech {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .tech-tag {
+      font-size: 0.7rem; font-family: var(--font-display); font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      background: rgba(245,242,236,0.08); color: rgba(245,242,236,0.6);
+      padding: 3px 10px; border-radius: 4px;
+    }
+    .project-links-row { display: flex; gap: 10px; }
+    .project-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border-radius: 6px; border: 1.5px solid rgba(245,242,236,0.2);
+      font-family: var(--font-display); font-weight: 700; font-size: 0.75rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      color: rgba(245,242,236,0.7); text-decoration: none;
+      transition: all 0.2s; cursor: none;
+    }
+    .project-link:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+    /* ─── CONTACT ─────────────────────────────────────── */
+    #contact {
+      background: var(--paper);
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+
+    .contact-left .section-title { font-size: clamp(2.5rem, 5vw, 4.5rem); }
+
+    .contact-email-big {
+      display: block; font-family: var(--font-display); font-weight: 800;
+      font-size: clamp(0.9rem, 1.6vw, 1.4rem); letter-spacing: -0.02em;
+      color: var(--ink); text-decoration: none; margin-top: 40px;
+      padding: 20px 24px; border: 2px solid var(--ink); border-radius: 10px;
+      position: relative; overflow: hidden; transition: color 0.3s;
+    }
+    .contact-email-big::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--ink); transform: translateX(-101%);
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      z-index: 0;
+    }
+    .contact-email-big:hover { color: var(--paper); }
+    .contact-email-big:hover::before { transform: translateX(0); }
+    .contact-email-big span { position: relative; z-index: 1; }
+    .contact-email-big .arrow { margin-left: 8px; transition: transform 0.3s; display: inline-block; }
+    .contact-email-big:hover .arrow { transform: translateX(6px); }
+
+    .contact-right { display: flex; flex-direction: column; gap: 32px; }
+    .contact-info-block {}
+    .contact-info-label {
+      font-family: var(--font-display); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 10px;
+    }
+    .contact-info-value {
+      font-family: var(--font-display); font-size: 1rem; font-weight: 700;
+      color: var(--ink); text-decoration: none;
+    }
+    .contact-info-value:hover { color: var(--red); }
+
+    .social-row { display: flex; gap: 16px; margin-top: 8px; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 22px; border-radius: 8px; border: 2px solid rgba(10,10,15,0.15);
+      font-family: var(--font-display); font-weight: 700; font-size: 0.8rem;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: var(--ink); text-decoration: none; transition: all 0.2s; cursor: none;
+    }
+    .social-btn:hover { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+    .social-btn svg { width: 16px; height: 16px; }
+
+    /* ─── FOOTER ──────────────────────────────────────── */
+    footer {
+      background: var(--ink); color: rgba(245,242,236,0.4);
+      padding: 32px 80px; display: flex; justify-content: space-between;
+      align-items: center; font-size: 0.8rem;
+    }
+    footer span { font-family: var(--font-display); font-weight: 700; }
+    .footer-love { color: var(--red); }
+
+    /* ─── FLOATING SOCIAL ────────────────────────────── */
+    .float-social {
+      position: fixed; right: 32px; top: 50%; transform: translateY(-50%);
+      display: flex; flex-direction: column; gap: 12px; z-index: 800;
+    }
+    .float-social a {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(245,242,236,0.9); border: 1.5px solid rgba(10,10,15,0.12);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s; cursor: none; text-decoration: none;
+    }
+    .float-social a:hover { background: var(--red); border-color: var(--red); }
+    .float-social svg { width: 16px; height: 16px; }
+    .float-social a:hover svg { filter: brightness(10); }
+
+    /* ─── ANIMATIONS ─────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ─── SCROLL PROGRESS ────────────────────────────── */
+    .progress-bar {
+      position: fixed; top: 0; left: 0; height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--red));
+      z-index: 9999; width: 0%; transition: width 0.1s;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+
+      #hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 40px; }
+      .hero-image-wrap { max-width: 320px; margin: 0 auto; }
+      .hero-image-wrap::after { font-size: 3.5rem; bottom: -14px; right: -14px; }
+      .hero-stats { gap: 20px; }
+
+      section { padding: 70px 24px; }
+      .about-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-wrap { max-width: 280px; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .skills-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .project-item { grid-template-columns: 1fr; gap: 12px; }
+      .project-num { display: none; }
+      #contact { grid-template-columns: 1fr; gap: 40px; }
+      footer { flex-direction: column; gap: 10px; text-align: center; padding: 24px; }
+      .float-social { display: none; }
+    }
+
+    @media (max-width: 600px) {
+      .hero-title { font-size: 2.4rem; }
+      .hero-actions { flex-direction: column; }
+      .btn { justify-content: center; }
+      .tools-row { gap: 8px; }
+      .tool-pill { font-size: 0.75rem; padding: 8px 14px; }
+      .project-links-row { flex-direction: column; }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Saif Akhter</h1>
-        <p>Aspiring QA Engineer | Software Tester</p>
-    </header>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#education">Education</a>
-        <a href="#contact">Contact</a>
-    </nav>
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
 
-    <section id="about">
-        <h2>About Me</h2>
-        <p>Hello! I'm Saif Akhter, a Software QA Engineer with 4+ years in software testing, focusing on seamless user experiences through robust strategies, manual/automated tests, and team collaboration.</p>
-        <p>Key projects include leading regression and API testing for an Audio Streaming platform (optimizing performance, reducing latency, +25% user satisfaction) and end-to-end testing for an NGO Educational LMS (ensuring accessibility for underprivileged communities).</p>
-        <p>Passionate about QA—let's connect on testing challenges!</p>
-    </section>
+  <!-- Progress Bar -->
+  <div class="progress-bar" id="progressBar"></div>
 
-    <section id="skills">
-        <h2>Skills</h2>
-        
-        <div class="skills-category">
-            <h3>Functional Testing</h3>
-            <ul>
-                <li>Exploratory Testing</li>
-                <li>Regression Testing</li>
-                <li>API Testing</li>
-                <li>System Testing</li>
-                <li>Cross-Browser Testing</li>
-                <li>UI/UX Testing</li>
-                <li>Mobile Testing</li>
-            </ul>
-        </div>
-        
-        <div class="skills-category">
-            <h3>Test Documentation</h3>
-            <ul>
-                <li>Test Case Designing</li>
-                <li>Test Case Execution</li>
-                <li>Test Planning</li>
-                <li>Defect Reporting and Tracking</li>
-                <li>Test Scenario Creation</li>
-                <li>Test Script Designing</li>
-            </ul>
-        </div>
-        
-        <div class="skills-category">
-            <h3>Non-Functional Testing</h3>
-            <ul>
-                <li>Performance Testing</li>
-                <li>Load Testing</li>
-                <li>Stress Testing</li>
-            </ul>
-        </div>
-        
-        <div class="skills-category">
-            <h3>Tools Used</h3>
-            <ul>
-                <li>HTML5, CSS3, JavaScript, TypeScript, SQL, ReactJS, TailwindCSS</li>
-                <li>TestRail, Trello, ClickUp, Jira</li>
-                <li>Apache JMeter, Google Lighthouse, Git, GitHub, Postman, Playwright, Chrome Developer Tools, Visual Studio Code</li>
-            </ul>
-        </div>
-    </section>
+  <!-- NAV -->
+  <nav id="mainNav">
+    <a href="#hero" class="nav-logo">Chadie<span>.</span></a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#certifications">Certs</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact" class="nav-cta">Contact</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
 
-    <section id="projects">
-        <h2>Projects</h2>
-        <div class="project">
-            <h3>Automated Testing Suite for Web App</h3>
-            <p>Developed an end-to-end testing framework using Playwright for a sample e-commerce site. Identified and fixed 15+ bugs during regression testing.</p>
-            <a href="https://github.com/your-repo/project1" target="_blank">View on GitHub</a>
-        </div>
-        <div class="project">
-            <h3>Performance Analysis Tool</h3>
-            <p>Used JMeter to simulate load on a REST API, optimizing response times by 20%. Included detailed reports and visualizations.</p>
-            <a href="https://github.com/your-repo/project2" target="_blank">View on GitHub</a>
-        </div>
-        <!-- Add more projects as needed -->
-    </section>
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#about" onclick="closeMobileMenu()">About</a>
+    <a href="#skills" onclick="closeMobileMenu()">Skills</a>
+    <a href="#tools" onclick="closeMobileMenu()">Tools</a>
+    <a href="#certifications" onclick="closeMobileMenu()">Certificates</a>
+    <a href="#projects" onclick="closeMobileMenu()">Projects</a>
+    <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  </div>
 
-    <section id="education">
-        <h2>Education</h2>
-        <ul>
-            <li><strong>Bachelor's Degree in Computer Science</strong> - University Name, Graduation Year</li>
-            <li><strong>ISTQB Certified Tester Foundation Level</strong> - Year Obtained</li>
-            <!-- Add more education items as needed -->
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg-text">QA</div>
+
+    <div class="hero-content">
+      <div class="hero-badge">Available for Opportunities</div>
+
+      <h1 class="hero-title">
+        <span class="line">Charlon</span>
+        <span class="line accent">Dale G.</span>
+        <span class="line stroke">San Agustin</span>
+      </h1>
+
+      <p class="hero-sub">
+        A dedicated <strong>Software QA Engineer</strong> with a passion for ensuring seamless, 
+        high-quality software. Specializing in test strategies, test documentation, 
+        and automation — delivering software that <em>exceeds</em> expectations.
+      </p>
+
+      <div class="hero-actions">
+        <a href="mailto:charlondalesanagustin@gmail.com" class="btn btn-primary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get in Touch
+        </a>
+        <a href="#" class="btn btn-outline" id="resumeBtn" download>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download CV
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">3+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">10+</div>
+          <div class="stat-label">Testing Techniques</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">8+</div>
+          <div class="stat-label">Certifications</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-image-wrap">
+      <img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/San%20Agustin,%20Charlon%20Dale%20G.jpeg" 
+           alt="Charlon Dale G. San Agustin" />
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about-bg-number">QA</div>
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-img-frame">
+          <img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/chadie-banner.jpg" alt="Charlon banner" />
+        </div>
+        <div class="about-sticker">Bug<br>Hunter</div>
+      </div>
+
+      <div class="about-text reveal">
+        <div class="section-tag">About Me</div>
+        <h2 class="section-title">The person<br>behind the <em>tests</em></h2>
+        <p>
+          Hello! I'm a <strong>Software QA Engineer</strong> with hands-on experience delivering top-quality products. 
+          I excel in creating comprehensive test documentation, executing black-box testing, 
+          and collaborating effectively to spot issues early.
+        </p>
+        <p>
+          I stay updated with industry trends and embrace new approaches to improve software quality 
+          continuously. Whether it's manual testing or automation with <strong>Playwright</strong>, 
+          I'm always up for a challenge.
+        </p>
+        <p>
+          Let's work together to make your product shine — one test at a time!
+        </p>
+
+        <div class="about-tags">
+          <span class="about-tag">#QualityAssurance</span>
+          <span class="about-tag">#SoftwareTesting</span>
+          <span class="about-tag">#TestAutomation</span>
+          <span class="about-tag">#EliminateTheBugs</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="skills-header reveal">
+      <div>
+        <div class="section-tag">What I Do</div>
+        <h2 class="section-title">Core <em>Skills</em></h2>
+      </div>
+      <p class="section-sub" style="text-align:right; max-width: 320px;">
+        A well-rounded QA toolkit covering functional, documentation, and non-functional testing.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <div class="skill-num">01</div>
+        <div class="skill-icon-wrap">🔍</div>
+        <div class="skill-title">Functional Testing</div>
+        <div class="skill-desc">Capable and efficient across all major testing types.</div>
+        <ul class="skill-list">
+          <li class="skill-item">Exploratory Testing</li>
+          <li class="skill-item">Regression Testing</li>
+          <li class="skill-item">User Acceptance Testing (UAT)</li>
+          <li class="skill-item">API Testing</li>
+          <li class="skill-item">System Testing</li>
+          <li class="skill-item">Cross Browser Testing</li>
+          <li class="skill-item">UI/UX Testing</li>
+          <li class="skill-item">Smoke & Alpha Testing</li>
+          <li class="skill-item">End-to-End Testing</li>
         </ul>
-    </section>
+      </div>
 
-    <section id="contact">
-        <h2>Contact</h2>
-        <p>Feel free to reach out for collaborations or discussions!</p>
-        <p>Email: <a href="mailto: akhtersaif66@gmail.com"></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/your-profile" target="_blank">LinkedIn Profile</a></p>
-        <p>GitHub: <a href="https://github.com/sakhter313" target="_blank">GitHub Profile</a></p>
-    </section>
+      <div class="skill-card reveal">
+        <div class="skill-num">02</div>
+        <div class="skill-icon-wrap">📋</div>
+        <div class="skill-title">Test Documentation</div>
+        <div class="skill-desc">Writing tests that ensure software is well-documented.</div>
+        <ul class="skill-list">
+          <li class="skill-item">Test Case Designing</li>
+          <li class="skill-item">Test Case Execution</li>
+          <li class="skill-item">Test Planning</li>
+          <li class="skill-item">Defect Reporting</li>
+          <li class="skill-item">Defect Tracking</li>
+          <li class="skill-item">Test Scenario Creation</li>
+          <li class="skill-item">Test Script Designing</li>
+        </ul>
+      </div>
 
-    <footer>
-        &copy; 2026 Saif Akhter. All rights reserved.
-    </footer>
+      <div class="skill-card reveal">
+        <div class="skill-num">03</div>
+        <div class="skill-icon-wrap">⚡</div>
+        <div class="skill-title">Non-Functional Testing</div>
+        <div class="skill-desc">Testing load, performance, and system reliability.</div>
+        <ul class="skill-list">
+          <li class="skill-item">Performance Testing</li>
+          <li class="skill-item">Load Testing</li>
+          <li class="skill-item">Stress Testing</li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Simple smooth scrolling for navigation links
-        document.querySelectorAll('nav a').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                targetElement.scrollIntoView({ behavior: 'smooth' });
-            });
+  <!-- TOOLS -->
+  <section id="tools">
+    <div class="tools-intro reveal">
+      <div class="section-tag">Tech Stack</div>
+      <h2 class="section-title">Tools &amp; <em>Technologies</em></h2>
+      <p class="section-sub">Every great QA engineer has a trusted toolkit. Here's mine.</p>
+    </div>
+
+    <div class="tools-category reveal">
+      <div class="tools-cat-label">Programming Languages &amp; Frameworks</div>
+      <div class="tools-row">
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/html-5.png" alt="HTML5" />HTML5</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/css-3.png" alt="CSS3" />CSS3</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/js.png" alt="JS" />JavaScript</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/ts-logo-128.png" alt="TS" />TypeScript</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/sql-server.png" alt="SQL" />SQL</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/react.png" alt="React" />ReactJS</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/tailwind.png" alt="Tailwind" />TailwindCSS</div>
+      </div>
+    </div>
+
+    <div class="tools-category reveal">
+      <div class="tools-cat-label">Project &amp; Test Management</div>
+      <div class="tools-row">
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/test-rail-logo.png" alt="TestRail" />TestRail</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/trello.png" alt="Trello" />Trello</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/clickup-logo.png" alt="ClickUp" />ClickUp</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/jira.png" alt="Jira" />Jira</div>
+      </div>
+    </div>
+
+    <div class="tools-category reveal">
+      <div class="tools-cat-label">Testing &amp; Developer Tools</div>
+      <div class="tools-row">
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/jmeter_square.png" alt="JMeter" />Apache JMeter</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/google-lighthouse.png" alt="Lighthouse" />Google Lighthouse</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/postman.png" alt="Postman" />Postman</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/playwright logo 2.png" alt="Playwright" />Playwright</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/Git-Icon-1788C.png" alt="Git" />Git</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/github128.png" alt="GitHub" />GitHub</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/devtools-square-128.png" alt="DevTools" />Chrome DevTools</div>
+        <div class="tool-pill"><img src="https://charlon-dale.github.io/Chadie-Portfolio/assets/vscode.png" alt="VSCode" />VS Code</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS -->
+  <section id="certifications">
+    <div class="certs-header reveal">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title">Certifications &amp; <em>Achievements</em></h2>
+      <p class="section-sub">Continuous learning is part of my DNA as a QA engineer.</p>
+    </div>
+
+    <div class="certs-grid">
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/1M5ja7GkksPGwL0JiE4WUpejvTrXiqvp5/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2025</div>
+        <div class="cert-body">
+          <div class="cert-title">Setting a Foundation for Successful Test Automation</div>
+          <div class="cert-issuer">March 2025 · Xtendly</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/1j5MYn2OqgmRRoBTeqTluM6b6CHCTM4Gf/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2025</div>
+        <div class="cert-body">
+          <div class="cert-title">Postman API Fundamentals Student Expert</div>
+          <div class="cert-issuer">February 2025 · Postman</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/19AcJbXy7jIgwnaCcg9SqI64KfIouYLU-/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2024</div>
+        <div class="cert-body">
+          <div class="cert-title">Six Sigma White Belt Certification</div>
+          <div class="cert-issuer">April 2024 · Six Sigma PH</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/1srvfWOTEitmWjH9ZLy0_UyefKE2qHD6i/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2024</div>
+        <div class="cert-body">
+          <div class="cert-title">Certificate of Completion: Software Testing Tutorial</div>
+          <div class="cert-issuer">March 2024 · Great Learning</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/1ZrfsWfyGQi3KSNSSNkXigLg7ybKf1esc/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2024</div>
+        <div class="cert-body">
+          <div class="cert-title">Software QA Manual Testing: ISTQB Certification Foundations Training</div>
+          <div class="cert-issuer">January 2024 · Mindworx</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/1f_44a2q6uMq7ERKk2oTVRFPcPVnJ4yB7/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2022</div>
+        <div class="cert-body">
+          <div class="cert-title">DOST-NCR R&D Conference — Oral Paper Competition 1st Place</div>
+          <div class="cert-issuer">December 2022 · DOST-NCR</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/1JJ7NIG5O6OQ-8ksR2JL0mH_LnUwRlyQD/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2022</div>
+        <div class="cert-body">
+          <div class="cert-title">Wadhwani Employability Skills Program</div>
+          <div class="cert-issuer">Jan–May 2022 · Wadhwani Foundation</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+
+      <a class="cert-card reveal" href="https://drive.google.com/file/d/18mMKiergM2jB_-fiihAR3biExfv8Do3z/view?usp=sharing" target="_blank" rel="noopener">
+        <div class="cert-year">2021</div>
+        <div class="cert-body">
+          <div class="cert-title">HTML and CSS Workshop Certificate</div>
+          <div class="cert-issuer">September 2021 · Skourse Academy</div>
+        </div>
+        <div class="cert-arrow">↗</div>
+      </a>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="projects-header reveal">
+      <div class="section-tag">Work</div>
+      <h2 class="section-title">Featured <em>Projects</em></h2>
+    </div>
+
+    <div class="projects-list">
+      <div class="project-item reveal">
+        <div class="project-num">01</div>
+        <div class="project-main">
+          <div class="project-name">Guru99 — Insurance Project</div>
+          <div class="project-meta">
+            <span class="project-year">March 2024</span>
+            <div class="project-tech">
+              <span class="tech-tag">QA Testing</span>
+              <span class="tech-tag">Test Cases</span>
+              <span class="tech-tag">Defect Reporting</span>
+            </div>
+          </div>
+          <p style="color:rgba(245,242,236,0.45); font-size:0.88rem; margin-top:10px; max-width:600px; line-height:1.6;">
+            Provided insurance agents with a facility to generate and store Insurance Quotes for Cars. Complete test coverage with detailed test cases, execution reports, and defect tracking.
+          </p>
+        </div>
+        <div class="project-links-row">
+          <a href="https://demo.guru99.com/insurance/v3/index.php" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Live
+          </a>
+          <a href="https://github.com/Charlon-Dale/Guru99-Insurance-Project" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project-item reveal">
+        <div class="project-num">02</div>
+        <div class="project-main">
+          <div class="project-name">Guru99 — Banking Project</div>
+          <div class="project-meta">
+            <span class="project-year">Jan–Feb 2024</span>
+            <div class="project-tech">
+              <span class="tech-tag">Functional Testing</span>
+              <span class="tech-tag">Test Planning</span>
+              <span class="tech-tag">Bug Tracking</span>
+            </div>
+          </div>
+          <p style="color:rgba(245,242,236,0.45); font-size:0.88rem; margin-top:10px; max-width:600px; line-height:1.6;">
+            Net banking facility platform for Guru99 customers. Covered end-to-end functional testing scenarios including account management, fund transfers, and customer workflows.
+          </p>
+        </div>
+        <div class="project-links-row">
+          <a href="https://demo.guru99.com/V4/" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Live
+          </a>
+          <a href="https://github.com/Charlon-Dale/Guru99-Banking-Project" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+
+      <div class="project-item reveal">
+        <div class="project-num">03</div>
+        <div class="project-main">
+          <div class="project-name">RTU Connect — Blockchain Social Platform</div>
+          <div class="project-meta">
+            <span class="project-year">Aug–Dec 2022</span>
+            <div class="project-tech">
+              <span class="tech-tag">Blockchain</span>
+              <span class="tech-tag">ReactJS</span>
+              <span class="tech-tag">System Testing</span>
+            </div>
+          </div>
+          <p style="color:rgba(245,242,236,0.45); font-size:0.88rem; margin-top:10px; max-width:600px; line-height:1.6;">
+            A Decentralized Social Media Platform for Rizal Technological University using Blockchain Technology. DOST-NCR 1st Place award-winning R&D project.
+          </p>
+        </div>
+        <div class="project-links-row">
+          <a href="https://rtu-connect.vercel.app/login" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            Live
+          </a>
+          <a href="https://github.com/Charlon-Dale/RTU-Connect" target="_blank" rel="noopener" class="project-link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-left reveal">
+      <div class="section-tag">Let's Talk</div>
+      <h2 class="section-title">Ready to<br><em>collaborate?</em></h2>
+      <p class="section-sub" style="margin-top: 20px;">
+        Looking for a dedicated QA Engineer? Let's connect and make your software bulletproof — together.
+      </p>
+      <a href="mailto:charlondalesanagustin@gmail.com" class="contact-email-big">
+        <span>charlondalesanagustin@gmail.com <span class="arrow">→</span></span>
+      </a>
+    </div>
+
+    <div class="contact-right reveal">
+      <div class="contact-info-block">
+        <div class="contact-info-label">Connect Online</div>
+        <div class="social-row">
+          <a href="https://github.com/Charlon-Dale" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.linkedin.com/in/charlon-san-agustin/" target="_blank" rel="noopener" class="social-btn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-info-block">
+        <div class="contact-info-label">Download CV</div>
+        <a href="#" class="btn btn-primary" id="resumeBtn2" style="display:inline-flex; margin-top: 4px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7,10 12,15 17,10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Resume / CV
+        </a>
+        <p style="font-size:0.78rem; color:var(--gray); margin-top:10px;">
+          Replace the <code>#</code> href with your actual CV file link (Google Drive or PDF).
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FLOATING SOCIAL -->
+  <div class="float-social">
+    <a href="https://github.com/Charlon-Dale" target="_blank" rel="noopener" title="GitHub">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.2 11.38.6.11.82-.26.82-.58v-2.03c-3.34.72-4.04-1.61-4.04-1.61-.54-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.08 1.84 1.24 1.84 1.24 1.07 1.83 2.8 1.3 3.49 1 .1-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 3-.4c1.02 0 2.04.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.25 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22v3.29c0 .32.21.7.82.58C20.56 21.8 24 17.3 24 12c0-6.63-5.37-12-12-12z"/></svg>
+    </a>
+    <a href="https://www.linkedin.com/in/charlon-san-agustin/" target="_blank" rel="noopener" title="LinkedIn">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.47-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg>
+    </a>
+    <a href="mailto:charlondalesanagustin@gmail.com" title="Email">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>Charlon Dale G. San Agustin</span>
+    <span>Made with <span class="footer-love">♥</span> · QA Engineer · 2025</span>
+  </footer>
+
+  <script>
+    // ─── CURSOR ───────────────────────────────────────────────
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+    document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+    function animateCursor() {
+      cursor.style.left = mx + 'px'; cursor.style.top = my + 'px';
+      rx += (mx - rx) * 0.15; ry += (my - ry) * 0.15;
+      ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+      requestAnimationFrame(animateCursor);
+    }
+    animateCursor();
+
+    // ─── SCROLL PROGRESS ─────────────────────────────────────
+    const bar = document.getElementById('progressBar');
+    window.addEventListener('scroll', () => {
+      const pct = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+      bar.style.width = pct + '%';
+    });
+
+    // ─── NAV SCROLL ───────────────────────────────────────────
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // ─── HAMBURGER ───────────────────────────────────────────
+    const ham = document.getElementById('hamburger');
+    const mob = document.getElementById('mobileMenu');
+    ham.addEventListener('click', () => {
+      ham.classList.toggle('open');
+      mob.classList.toggle('open');
+    });
+    function closeMobileMenu() {
+      ham.classList.remove('open');
+      mob.classList.remove('open');
+    }
+
+    // ─── REVEAL ON SCROLL ────────────────────────────────────
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => observer.observe(el));
+
+    // ─── RESUME BTN TOOLTIP ──────────────────────────────────
+    ['resumeBtn','resumeBtn2'].forEach(id => {
+      const btn = document.getElementById(id);
+      if (btn) {
+        btn.addEventListener('click', e => {
+          e.preventDefault();
+          alert('📄 To enable CV download:\n\nReplace href="#" with your actual Google Drive or PDF link.\nExample: href="https://drive.google.com/uc?export=download&id=YOUR_FILE_ID"');
         });
-    </script>
+      }
+    });
+  </script>
 </body>
 </html>
